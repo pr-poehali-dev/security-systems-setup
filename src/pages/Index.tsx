@@ -31,7 +31,7 @@ const Index = () => {
       {/* Header */}
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-background/70 border-b border-border">
         <div className="container flex items-center justify-between h-16">
-          <div className="flex items-center gap-2 font-display font-bold text-lg tracking-wide">
+          <div className="flex items-center gap-3 font-display font-bold text-2xl tracking-wide">
             <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary text-primary-foreground neon-glow">
               <Icon name="Zap" size={20} />
             </span>
