@@ -42,11 +42,18 @@ const Index = () => {
             <a href="#advantages" className="hover:text-primary transition-colors">Преимущества</a>
             <a href="#contacts" className="hover:text-primary transition-colors">Контакты</a>
           </nav>
-          <a href="tel:+79092057512">
-            <Button className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
-              <Icon name="Phone" size={16} /> Позвонить
-            </Button>
-          </a>
+          <div className="flex items-center gap-3">
+            <a href="/pdf" target="_blank">
+              <Button variant="outline" className="border-border text-foreground hover:bg-secondary font-semibold hidden md:flex">
+                <Icon name="FileDown" size={16} /> PDF
+              </Button>
+            </a>
+            <a href="tel:+79092057512">
+              <Button className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
+                <Icon name="Phone" size={16} /> Позвонить
+              </Button>
+            </a>
+          </div>
         </div>
       </header>
 
