@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Icon from '@/components/ui/icon';
+import * as XLSX from 'xlsx';
 
 const API = 'https://functions.poehali.dev/a425146a-ba84-4d1c-8403-e14857072e16';
 
@@ -71,6 +72,41 @@ export default function Warehouse() {
     if (tab === 'journal') loadMovements();
     if (tab === 'balance') loadBalance();
   }, [tab, filterObj, filterType]);
+
+  const exportJournal = () => {
+    const rows = movements.map(m => ({
+      'Дата': fmtDate(m.moved_at),
+      'Объект': m.object_name,
+      'Материал': m.material_name,
+      'Ед. изм.': m.unit,
+      'Тип': m.movement_type === 'in' ? 'Приход' : 'Расход',
+      'Количество': Number(m.quantity),
+      'Документ': m.doc_number || '',
+      'Примечание': m.note || '',
+    }));
+    const ws = XLSX.utils.json_to_sheet(rows);
+    ws['!cols'] = [{ wch: 12 }, { wch: 30 }, { wch: 30 }, { wch: 8 }, { wch: 10 }, { wch: 12 }, { wch: 14 }, { wch: 24 }];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Журнал движений');
+    XLSX.writeFile(wb, `Журнал_материалов_${new Date().toLocaleDateString('ru-RU').replace(/\./g, '-')}.xlsx`);
+  };
+
+  const exportBalance = () => {
+    const rows = balance.map(b => ({
+      'Категория': b.category || '',
+      'Материал': b.name,
+      'Ед. изм.': b.unit,
+      'Приход': Number(b.total_in),
+      'Расход': Number(b.total_out),
+      'Остаток': Number(b.balance),
+    }));
+    const ws = XLSX.utils.json_to_sheet(rows);
+    ws['!cols'] = [{ wch: 20 }, { wch: 34 }, { wch: 8 }, { wch: 12 }, { wch: 12 }, { wch: 12 }];
+    const wb = XLSX.utils.book_new();
+    const objName = objects.find(o => String(o.id) === filterObj)?.name || 'Все объекты';
+    XLSX.utils.book_append_sheet(wb, ws, 'Остатки');
+    XLSX.writeFile(wb, `Остатки_${objName}_${new Date().toLocaleDateString('ru-RU').replace(/\./g, '-')}.xlsx`);
+  };
 
   const openNew = () => { setModal({ ...EMPTY_MOV }); setEditId(null); };
   const openEdit = (m: Movement) => {
@@ -154,9 +190,21 @@ export default function Warehouse() {
               </select>
             )}
             {tab === 'journal' && (
-              <button onClick={openNew}
-                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 10, background: '#0057ff', color: '#fff', fontWeight: 600, fontSize: 14, border: 'none', cursor: 'pointer', marginLeft: 'auto' }}>
-                <Icon name="Plus" size={16} /> Добавить запись
+              <div style={{ display: 'flex', gap: 8, marginLeft: 'auto' }}>
+                <button onClick={exportJournal} disabled={movements.length === 0}
+                  style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 18px', borderRadius: 10, background: '#16a34a', color: '#fff', fontWeight: 600, fontSize: 14, border: 'none', cursor: movements.length === 0 ? 'not-allowed' : 'pointer', opacity: movements.length === 0 ? 0.5 : 1 }}>
+                  <Icon name="Download" size={16} /> Excel
+                </button>
+                <button onClick={openNew}
+                  style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 10, background: '#0057ff', color: '#fff', fontWeight: 600, fontSize: 14, border: 'none', cursor: 'pointer' }}>
+                  <Icon name="Plus" size={16} /> Добавить запись
+                </button>
+              </div>
+            )}
+            {tab === 'balance' && (
+              <button onClick={exportBalance} disabled={balance.length === 0}
+                style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 18px', borderRadius: 10, background: '#16a34a', color: '#fff', fontWeight: 600, fontSize: 14, border: 'none', cursor: balance.length === 0 ? 'not-allowed' : 'pointer', opacity: balance.length === 0 ? 0.5 : 1, marginLeft: 'auto' }}>
+                <Icon name="Download" size={16} /> Excel
               </button>
             )}
           </div>
