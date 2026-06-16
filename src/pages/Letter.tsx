@@ -4,10 +4,10 @@ const PRODUCT_IMG =
   'https://cdn.poehali.dev/projects/ca6da9d7-cd5f-4d59-b717-8b4d3f94444d/files/d5a5fd72-d62c-4c12-8e4c-f79239e25c82.jpg';
 
 const products = [
-  { icon: 'ToggleLeft', title: 'Модульная автоматика', desc: 'Автоматические выключатели, УЗО, дифавтоматы, боксы и щитки.' },
-  { icon: 'Plug', title: 'Установочное оборудование', desc: 'Розетки, выключатели, рамки — широкий выбор серий и производителей.' },
-  { icon: 'Lightbulb', title: 'Лампы и светильники', desc: 'LED, люминесцентные, промышленные, декоративные — любой вид и мощность.' },
-  { icon: 'Cable', title: 'Кабельно-проводниковая продукция', desc: 'ВВГ, NYM, ПВС, КВВ, КВВГ и другие марки кабеля в наличии и под заказ.' },
+  { icon: 'ToggleLeft', title: 'Модульная автоматика', desc: 'Автоматические выключатели, УЗО, дифавтоматы, боксы и щитки.', img: 'https://cdn.poehali.dev/projects/ca6da9d7-cd5f-4d59-b717-8b4d3f94444d/files/37558431-daee-4bd6-bc7b-ef9cc4301a39.jpg' },
+  { icon: 'Plug', title: 'Установочное оборудование', desc: 'Розетки, выключатели, рамки — широкий выбор серий и производителей.', img: 'https://cdn.poehali.dev/projects/ca6da9d7-cd5f-4d59-b717-8b4d3f94444d/files/545c690e-71b1-4a6d-9371-0471f0a85a13.jpg' },
+  { icon: 'Lightbulb', title: 'Лампы и светильники', desc: 'LED, люминесцентные, промышленные, декоративные — любой вид и мощность.', img: 'https://cdn.poehali.dev/projects/ca6da9d7-cd5f-4d59-b717-8b4d3f94444d/files/e1b172eb-0da0-4dc5-9dc6-668ab1221aec.jpg' },
+  { icon: 'Cable', title: 'Кабельно-проводниковая продукция', desc: 'ВВГ, NYM, ПВС, КВВ, КВВГ и другие марки кабеля в наличии и под заказ.', img: 'https://cdn.poehali.dev/projects/ca6da9d7-cd5f-4d59-b717-8b4d3f94444d/files/88c468fa-cab4-4e41-9f45-f8417905ec27.jpg' },
 ];
 
 const benefits = [
@@ -90,13 +90,18 @@ const Letter = () => {
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
               {products.map((p) => (
-                <div key={p.title} style={{ padding: '20px 22px', borderRadius: 14, background: '#f8fafc', border: '1px solid #e2e8f0', display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                  <div style={{ width: 40, height: 40, borderRadius: 10, background: '#e8f0fe', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0057ff', flexShrink: 0 }}>
-                    <Icon name={p.icon} size={18} />
+                <div key={p.title} style={{ borderRadius: 14, background: '#f8fafc', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+                  <div style={{ height: 160, overflow: 'hidden', background: '#fff' }}>
+                    <img src={p.img} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
                   </div>
-                  <div>
-                    <div style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 600, fontSize: 14, marginBottom: 4, color: '#0f172a' }}>{p.title}</div>
-                    <div style={{ fontSize: 12, color: '#64748b', lineHeight: 1.5 }}>{p.desc}</div>
+                  <div style={{ padding: '16px 18px', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 9, background: '#e8f0fe', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0057ff', flexShrink: 0 }}>
+                      <Icon name={p.icon} size={16} />
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: "'Oswald', sans-serif", fontWeight: 600, fontSize: 14, marginBottom: 4, color: '#0f172a' }}>{p.title}</div>
+                      <div style={{ fontSize: 12, color: '#64748b', lineHeight: 1.5 }}>{p.desc}</div>
+                    </div>
                   </div>
                 </div>
               ))}
