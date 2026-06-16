@@ -35,7 +35,7 @@ const Index = () => {
             <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary text-primary-foreground neon-glow">
               <Icon name="Zap" size={20} />
             </span>
-            <span>ЭЛЕКТРО<span className="text-primary">СИСТЕМЫ</span></span>
+            <span>ООО «<span className="text-primary">СОМАКС</span>»</span>
           </div>
           <nav className="hidden md:flex items-center gap-7 text-sm text-muted-foreground">
             <a href="#services" className="hover:text-primary transition-colors">Услуги</a>
@@ -56,7 +56,7 @@ const Index = () => {
         <div className="container relative grid lg:grid-cols-2 gap-12 items-center py-20">
           <div className="animate-fade-up">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/40 text-primary text-xs font-semibold tracking-widest uppercase mb-6">
-              <Icon name="Sparkles" size={14} /> Системы безопасности под ключ
+              <Icon name="Sparkles" size={14} /> ООО «Сомакс» — системы безопасности под ключ
             </span>
             <h1 className="font-display font-bold text-5xl md:text-7xl leading-[0.95] mb-6">
               ИНЖЕНЕРНЫЕ <span className="text-primary neon-text">СИСТЕМЫ</span> ДЛЯ ВАШЕГО ОБЪЕКТА
@@ -200,9 +200,9 @@ const Index = () => {
         <div className="container flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-2 font-display font-bold text-foreground">
             <Icon name="Zap" size={18} className="text-primary" />
-            ЭЛЕКТРОСИСТЕМЫ
+            ООО «СОМАКС»
           </div>
-          <p>© 2026 Электромонтаж и системы безопасности. Лицензия МЧС.</p>
+          <p>© 2026 ООО «Сомакс» — электромонтаж и системы безопасности. Лицензия МЧС.</p>
         </div>
       </footer>
     </div>
