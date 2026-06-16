@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Pdf from "./pages/Pdf";
 import Letter from "./pages/Letter";
 import Crm from "./pages/Crm";
+import Warehouse from "./pages/Warehouse";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/pdf" element={<Pdf />} />
           <Route path="/letter" element={<Letter />} />
           <Route path="/crm" element={<Crm />} />
+          <Route path="/warehouse" element={<Warehouse />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
